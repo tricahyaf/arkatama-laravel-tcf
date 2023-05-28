@@ -56,13 +56,13 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://wallpaperaccess.com/full/632787.jpg" class="d-block w-100" alt="carosel1" height="300px" width="600px">
+                    <img src="https://wallpaperaccess.com/full/632787.jpg" class="d-block w-100" alt="carosel1" height="300px">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://wallpaperaccess.com/full/632900.jpg" class="d-block w-100" alt="buah2" height="300px" width="600px">
+                    <img src="https://wallpaperaccess.com/full/632900.jpg" class="d-block w-100" alt="carosel2" height="300px">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://wallpaperaccess.com/full/234321.jpg" class="d-block w-100" alt="buah3" height="300px" width="600px">
+                    <img src="https://wallpaperaccess.com/full/234321.jpg" class="d-block w-100" alt="carosel3" height="300px">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -107,7 +107,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">ASUS ROG Zephyrus S15</h5>
+                                    <h5 class="fw-bolder">Asus ROG Zephyrus S15</h5>
                                     <!-- Product reviews-->
                                     <div class="d-flex justify-content-center small text-warning mb-2">
                                         <div class="bi-star-fill"></div>
