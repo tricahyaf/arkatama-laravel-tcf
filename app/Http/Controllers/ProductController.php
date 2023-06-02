@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -26,12 +27,18 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+
+        $imageName = time() . '.' . $request->image->extension();
+
+        Storage::putFileAs('public/product', $request->image, $imageName);
+
         $product = Product::create([
             'category_id' => $request->category,
             'name' => $request->name,
             'price' => $request->price,
             'sale_price' => $request->sale_price,
             'brands' => $request->brand,
+            'image' => $imageName,
         ]);
 
         return redirect()->route('product.index');
@@ -52,17 +59,33 @@ class ProductController extends Controller
     
     public function update(Request $request, $id)
     {
-        // ambil data product berdasarkan id
-        $product = Product::find($id);
-        
-        // update data product
-        $product->update([
-            'category_id' => $request->category,
-            'name' => $request->name,
-            'price' => $request->price,
-            'sale_price' => $request->sale_price,
-            'brands' => $request->brand,
-        ]);
+        if ($request->hasFile('image')) {
+            $old_image = Product::find($id)->image;
+            
+            Storage::delete('public/product/'.$old_image);
+
+            $imageName = time() . '.' . $request->image->extension();
+
+            Storage::putFileAs('public/product', $request->image, $imageName);
+
+            // update data product
+            Product::where('id',$id)->update([
+                'category_id' => $request->category,
+                'name' => $request->name,
+                'price' => $request->price,
+                'sale_price' => $request->sale_price,
+                'brands' => $request->brand,
+                'image' => $imageName,
+            ]);
+        } else {
+            Product::where('id',$id)->update([
+                'category_id' => $request->category,
+                'name' => $request->name,
+                'price' => $request->price,
+                'sale_price' => $request->sale_price,
+                'brands' => $request->brand,
+            ]);
+        }
         
         // redirect ke halaman product.index
         return redirect()->route('product.index');
