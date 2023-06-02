@@ -11,7 +11,6 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        //dd($categories);
 
         return view('category.index', compact('categories'));
     }
@@ -32,36 +31,28 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        // ambil data category berdasarkan id
         $category = Category::find($id);
 
-        // tampilkan view edit dan passing data category
         return view('category.edit', compact('category'));
     }
 
     public function update(Request $request, $id)
     {
-        // ambil data category berdasarkan id
         $category = Category::find($id);
 
-        // update data category
         $category->update([
             'name' => $request->name
         ]);
 
-        // redirect ke halaman category.index
         return redirect()->route('category.index');
     }
 
     public function destroy($id)
     {
-        // ambil data category berdasarkan id
         $category = Category::find($id);
 
-        // hapus data category
         $category->delete();
 
-        // redirect ke halaman category.index
         return redirect()->route('category.index');
     }
 }

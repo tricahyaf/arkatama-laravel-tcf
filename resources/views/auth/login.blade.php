@@ -35,6 +35,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                
                 @if (Session::get('success'))
                     <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                         <strong>Sukses!</strong> Akun anda berhasil dibuat.
@@ -48,6 +49,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
+
                 <div class="card border-0 shadow rounded-3 mb-5 mt-2">
                     <div class="card-body p-4 p-sm-5">
                         <h5 class="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
@@ -62,6 +64,7 @@
                                 <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
                                 <label for="floatingPassword">Password</label>
                             </div>
+
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
                                 <label class="form-check-label" for="rememberPasswordCheck">
@@ -70,6 +73,7 @@
                             </div>
                             <div class="d-grid">
                                 <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Sign In</button>
+                                
                                 <br>
                                 <a href="{{ route('register') }}">Register Now</a>
                             </div>

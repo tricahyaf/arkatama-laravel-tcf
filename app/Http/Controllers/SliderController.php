@@ -52,22 +52,15 @@ class SliderController extends Controller
 
     public function update(Request $request, $id)
     {
-        // cek jika user mengupload gambar di form
         if ($request->hasFile('image')) {
-            // ambil nama file gambar lama dari database
             $old_image = Slider::find($id)->image;
             
-            // hapus file gambar lama dari folder slider
             Storage::delete('public/slider/'.$old_image);
 
-            // FILE BARU //
-            // ubah nama file gambar baru dengan angka random
             $imageName = time().'.'.$request->image->extension();
 
-            // upload file gambar ke folder slider
             Storage::putFileAs('public/slider', $request->file('image'), $imageName);
             
-            // update data sliders
             Slider::where('id', $id)->update([
                 'title' => $request->title,
                 'caption' => $request->caption,
@@ -75,8 +68,6 @@ class SliderController extends Controller
             ]);
             
         } else {
-            // jika user tidak mengupload gambar
-            // update data sliders hnaya untuk title dan caption
             Slider::where('id', $id)->update([
                 'title' => $request->title,
                 'caption' => $request->caption,
@@ -84,23 +75,17 @@ class SliderController extends Controller
         }
         
 
-        // alihkan halaman ke halaman sliders
         return redirect()->route('slider.index');
     }
 
     public function destroy($id)
     {
-        // cari data berdasarkan id menggunakan find()
-        // find() merupakan fungsi eloquent untuk mencari data berdasarkan primary key
         $slider = Slider::find($id);
 
-        // hapus file gambar dari folder slider
         Storage::delete('public/slider/'.$slider->image);
 
-        // hapus data dari table sliders
         $slider->delete();
 
-        // alihkan halaman ke halaman sliders
         return redirect()->route('slider.index');
     }
 }

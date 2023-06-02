@@ -37,41 +37,32 @@ class UserController extends Controller
     
     public function edit($id)
     {
-        // Ambil data user berdasarkan id
         $user = User::find($id);
         
-        // Ambil data roles dari database
         $roles = Role::all();
         
-        // Tampilkan halaman edit dengan passing data user dan roles
         return view('user.edit', compact('user', 'roles'));
     }
     
     public function update(Request $request, $id)
     {
-        // Ambil data user berdasarkan id
         $user = User::find($id);
         
-        // Update data user
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone
         ]);
         
-        // Redirect ke halaman user.index
         return redirect()->route('user.index');
     }
     
     public function destroy($id)
     {
-        // Ambil data user berdasarkan id
         $user = User::find($id);
         
-        // Hapus data user
         $user->delete();
         
-        // Redirect ke halaman user.index
         return redirect()->route('user.index');
     }
 }
