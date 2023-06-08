@@ -22,14 +22,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                                @foreach ($categories as $category)
+                                    <li><a class="dropdown-item" href="{{ route('landing', ['category' => $category->name]) }}">{{ $category->name }}</a></li>
+                                @endforeach
                             </ul>
                         </li>
                     </ul>
@@ -39,10 +38,20 @@
                             Cart
                             <span class="badge bg-light text-dark ms-1 rounded-pill">0</span>
                         </a>
-                        <a href="{{ route('login') }}" class="btn btn-outline-light ms-1">
-                            <i class="bi-person-fill me-1"></i>
-                            Login
-                        </a>
+                        
+                        @auth
+                            <a href="{{ route('dashboard') }}" class="btn btn-outline-light ms-1">
+                                <i class="bi-person-fill me-1"></i>
+                                Dashboard
+                            </a>
+                        @endauth
+                        
+                        @guest
+                            <a href="{{ route('login') }}" class="btn btn-outline-light ms-1">
+                                <i class="bi-person-fill me-1"></i>
+                                Login
+                            </a>
+                        @endguest
                     </form>
                 </div>
             </div>
@@ -78,6 +87,20 @@
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
+                <form action="{{ route('landing') }}" method="GET">
+                    @csrf
+                    <div class="row g-3 my-5">
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" placeholder="Min" name="min" value="{{ old('min') }}">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" placeholder="Max" name="max" value={{ old('max') }}>
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </div>
+                </form>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     
                     @forelse ($products as $product)
@@ -129,7 +152,7 @@
         </section>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Tri Computer 2023</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

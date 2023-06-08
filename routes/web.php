@@ -25,11 +25,11 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('landing');
-});
+// Route::get('/', function () {
+//     return view('landing');
+// });
 
-Route::get('/create', [UserController::class, 'create']);
+// Route::get('/create', [UserController::class, 'create']);
 
 // landing
 Route::get('/', [LandingController::class, 'index'])->name('landing');
@@ -39,6 +39,8 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+
+Route::get('/product/show/{id}', [ProductController::class, 'show'])->name('product.show');
 
 Route::middleware('auth')->group(function(){
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -84,7 +86,6 @@ Route::middleware('auth')->group(function(){
 
     Route::middleware('role:Admin|Staff')->group(function() {
         // product
-        Route::get('/product', [ProductController::class, 'index'])->name('product.index');
         Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
         Route::post('/product', [ProductController::class, 'store'])->name('product.store');
         Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');

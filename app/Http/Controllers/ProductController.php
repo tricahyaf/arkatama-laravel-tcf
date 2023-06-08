@@ -23,6 +23,20 @@ class ProductController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $product = Product::where('id', $id)->with('category')->first();
+
+        $related = Product::where('category_id', $product->category->id)->inRandomOrder()->limit(4)->get();
+
+        if ($product) {
+            return view('product.show', compact('product', 'related'));
+        } else {
+            abort(404);
+        }
+
+    }
+
     public function create()
     {
         $brands = Brand::all();
@@ -61,31 +75,30 @@ class ProductController extends Controller
         ]);
 
         return redirect()->route('product.index');
-
     }
 
     public function edit($id)
     {
         $product = Product::where('id', $id)->with('category')->first();
-        
+
         $brands = Brand::all();
         $categories = Category::all();
-        
+
         return view('product.edit', compact('product', 'brands', 'categories'));
     }
-    
+
     public function update(Request $request, $id)
     {
         if ($request->hasFile('image')) {
             $old_image = Product::find($id)->image;
-            
+
             Storage::delete('public/product/'.$old_image);
 
             $imageName = time() . '.' . $request->image->extension();
 
             Storage::putFileAs('public/product', $request->image, $imageName);
 
-            Product::where('id',$id)->update([
+            Product::where('id', $id)->update([
                 'category_id' => $request->category,
                 'name' => $request->name,
                 'price' => $request->price,
@@ -95,7 +108,7 @@ class ProductController extends Controller
             ]);
 
         } else {
-            Product::where('id',$id)->update([
+            Product::where('id', $id)->update([
                 'category_id' => $request->category,
                 'name' => $request->name,
                 'price' => $request->price,
@@ -103,16 +116,16 @@ class ProductController extends Controller
                 'brands' => $request->brand,
             ]);
         }
-        
+
         return redirect()->route('product.index');
     }
-    
+
     public function destroy($id)
     {
         $product = Product::find($id);
-        
+
         $product->delete();
-        
+
         return redirect()->route('product.index');
     }
 }

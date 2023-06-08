@@ -25,12 +25,12 @@
                             @foreach ($products as $product)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $product->category->name }}</td>
+                                    <td>{{ $product->category?->name }}</td>
                                     <td>{{ $product->name }}</td>
                                     <td>Rp. {{ number_format($product->price, 0, 2) }}</td>
                                     <td>Rp. {{ number_format($product->sale_price, 0, 2) }}</td>
                                     <td>
-                                        @if ($product->image ==null)
+                                        @if ($product->image == null)
                                             <span class="badge bg-primary">No Image</span>
                                         @else
                                             <img src="{{ asset('storage/product/' . $product->image) }}" alt="{{ $product->name }}" style="max-width: 50px">
