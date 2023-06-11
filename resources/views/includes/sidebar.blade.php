@@ -1,4 +1,4 @@
-<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+<nav class="sb-sidenav accordion sb-sidenav-dark bg-dark" id="sidenavAccordion">
     <div class="sb-sidenav-menu">
         <div class="nav">
             @if (Auth::user()->role->name == 'Admin' || Auth::user()->role->name == 'Staff')
@@ -18,7 +18,7 @@
             @endif
 
             <div class="sb-sidenav-menu-heading">Management</div>
-            @if (Auth::user()->role->name == 'Admin' || Auth::user()->role->name == 'Staff')
+            @if (Auth::user()->role->name == 'Admin')
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Product
@@ -28,6 +28,19 @@
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{ route('brand.index') }}">Brand</a>
                         <a class="nav-link" href="{{ route('category.index') }}">Category</a>
+                        <a class="nav-link" href="{{ route('product.index') }}">Product</a>
+                    </nav>
+                </div>
+            @endif
+
+            @if (Auth::user()->role->name == 'Staff')
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Product
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{ route('product.index') }}">Product</a>
                     </nav>
                 </div>

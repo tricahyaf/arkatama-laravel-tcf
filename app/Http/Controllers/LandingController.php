@@ -22,7 +22,7 @@ class LandingController extends Controller
         } else if ($request->min && $request->max) {
             $products = Product::where('price', '>=', $request->min)->where('price', '<=', $request->max)->get();
         } else {
-            $products = Product::inRandomOrder()->limit(8)->get();
+            $products = Product::inRandomOrder()->limit(20)->get();
         }
 
         return view('landing', compact('products', 'categories', 'sliders'));

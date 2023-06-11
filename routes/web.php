@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function(){
     });
 
     // Admin & Staff
-    Route::middleware('role:Admin|Staff')->group(function() {
+    Route::middleware('role:Admin')->group(function() {
         // Brand
         Route::get('/brand', [BrandController::class, 'index'])->name('brand.index');
         Route::get('/brand/create', [BrandController::class, 'create'])->name('brand.create');
@@ -71,7 +71,7 @@ Route::middleware('auth')->group(function(){
     });
 
     // Admin & Staff
-    Route::middleware('role:Admin|Staff')->group(function() {
+    Route::middleware('role:Admin')->group(function() {
         // category
         Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
         Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');

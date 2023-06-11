@@ -15,13 +15,13 @@
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Tri Computer</a>
+                <a class="navbar-brand" href="{{ route('landing') }}">Tri Computer</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ route('landing') }}">Home</a></li>
                         
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
@@ -33,11 +33,6 @@
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <a class="btn btn-outline-light" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-light text-dark ms-1 rounded-pill">0</span>
-                        </a>
                         
                         @auth
                             <a href="{{ route('dashboard') }}" class="btn btn-outline-light ms-1">
@@ -101,8 +96,8 @@
                         </div>
                     </div>
                 </form>
+                
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    
                     @forelse ($products as $product)
                         <div class="col mb-5">
                             <div class="card h-100">
@@ -118,8 +113,9 @@
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <!-- Product name-->
-                                        <a href="#" style="text-decoration: none" class="text-dark">
-                                            <h5 class="fw-bolder">{{$product->name}}</h5>
+                                        <a href="{{ route('product.show', ['id' => $product->id]) }}" style="text-decoration: none" class="text-dark">
+                                            <small class="text-strong">{{ $product->category->name }}</small>
+                                            <h5 class="fw-bolder">{{ $product->name }}</h5>
                                         </a>
                                         <!-- Product reviews-->
                                         <div class="d-flex justify-content-center small text-warning mb-2">
@@ -151,7 +147,7 @@
             </div>
         </section>
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
+        <footer class="py-5 bg-primary">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Tri Computer 2023</p></div>
         </footer>
         <!-- Bootstrap core JS-->
