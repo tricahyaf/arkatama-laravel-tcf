@@ -24,7 +24,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ route('landing') }}">Home</a></li>
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach ($categories as $category)
                                     <li><a class="dropdown-item" href="{{ route('landing', ['category' => $category->name]) }}">{{ $category->name }}</a></li>
@@ -85,11 +85,12 @@
                 <form action="{{ route('landing') }}" method="GET">
                     @csrf
                     <div class="row g-3 my-5">
+                        <h3>Batas Harga</h3>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" placeholder="Min" name="min" value="{{ old('min') }}">
+                            <input type="text" class="form-control" placeholder="Rp MIN" name="min" value="{{ old('min') }}">
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" placeholder="Max" name="max" value={{ old('max') }}>
+                            <input type="text" class="form-control" placeholder="Rp MAKS" name="max" value={{ old('max') }}>
                         </div>
                         <div class="col-sm-3">
                             <button type="submit" class="btn btn-primary">Cari</button>
